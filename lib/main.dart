@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tb_training_logs/screens/inital_screen.dart';
+import 'package:tb_training_logs/screens/home_screen.dart';
 import 'util.dart';
 import 'theme.dart';
 
@@ -23,9 +23,10 @@ class MyApp extends StatelessWidget {
 
     MaterialTheme theme = MaterialTheme(textTheme);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: brightness == Brightness.light ? theme.light() : theme.dark(),
-      home: const InitalScreen(),
+      home: const HomeScreen(plans: []),
     );
   }
 }
