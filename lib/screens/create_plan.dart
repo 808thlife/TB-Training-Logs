@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tb_training_logs/enums/exercises.dart';
+import 'package:tb_training_logs/enums/plan_status.dart';
+import 'package:tb_training_logs/models/create_plan_form_model.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/screens/proceed_with_plan.dart';
+import 'package:tb_training_logs/utils/generate_training_plan.dart';
 
 class CreatePlanScreen extends StatefulWidget {
   const CreatePlanScreen({super.key});
@@ -17,6 +22,10 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
   DateTime startDate = DateTime.now();
 
   DateTime get endDate => startDate.add(Duration(days: cycles * 42));
+
+  PushExercises? selectedPush;
+  PullExercises? selectedPull;
+  LegsExercises? selectedLegs;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +68,62 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
                   : "Conditioning-focused plan",
             ),
             const SizedBox(height: 20),
+            const Text("Exercises (PUSH/PULL/LEGS)"),
+            Center(
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment: WrapAlignment.center,
+                children: [
+                  DropdownButton<PushExercises>(
+                    value: selectedPush,
+                    items: PushExercises.values.map((exercise) {
+                      return DropdownMenuItem(
+                        value: exercise,
+                        child: Text(exercise.label),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPush = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 16),
+                  DropdownButton<PullExercises>(
+                    value: selectedPull,
+                    items: PullExercises.values.map((exercise) {
+                      return DropdownMenuItem(
+                        value: exercise,
+                        child: Text(exercise.label),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPull = value;
+                      });
+                    },
+                  ),
+                  SizedBox(width: 16),
+                  DropdownButton<LegsExercises>(
+                    value: selectedLegs,
+                    items: LegsExercises.values.map((exercise) {
+                      return DropdownMenuItem(
+                        value: exercise,
+                        child: Text(exercise.label),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedLegs = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
             Text("Cycles: $cycles"),
             DropdownButton<int>(
               value: cycles,
@@ -118,17 +183,26 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
               onPressed: () {
                 final endDate = startDate.add(Duration(days: cycles * 42));
 
-                final plan = TrainingPlan(
+                final formData = CreatePlanFormModel(
                   name: nameController.text,
+                  priority: priority,
+                  cycles: cycles,
                   startDate: startDate,
-                  endDate: endDate,
-                  priority: priority.toInt(),
-                  active: true,
+                  deadlift: Deadlift.df,
+                  selectedLegs: selectedLegs,
+                  selectedPull: selectedPull,
+                  selectedPush: selectedPush,
                 );
 
-                // save + navigate
+                // Sending the form data to the other screen.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProceedWithPlan(formModel: formData),
+                  ),
+                );
               },
-              child: const Text("Create Plan"),
+              child: const Text("Proceed"),
             ),
           ],
         ),

@@ -1,3 +1,5 @@
+import 'package:tb_training_logs/enums/plan_status.dart';
+import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:uuid/uuid.dart';
 
 class TrainingPlan {
@@ -10,7 +12,9 @@ class TrainingPlan {
   // range: 0 to 10
   final int priority;
 
-  bool active;
+  PlanStatus status;
+
+  final List<WorkoutDay> schedule;
 
   TrainingPlan({
     String? id,
@@ -18,6 +22,14 @@ class TrainingPlan {
     required this.startDate,
     required this.endDate,
     required this.priority,
-    required this.active,
+    required this.status,
+    required this.schedule,
   }) : id = id ?? const Uuid().v4();
+}
+
+class WorkoutDay {
+  final DateTime date;
+  final WorkoutType type;
+
+  WorkoutDay({required this.date, required this.type});
 }
