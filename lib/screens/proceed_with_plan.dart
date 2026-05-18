@@ -76,10 +76,8 @@ class _ProceedWithPlanState extends State<ProceedWithPlan> {
                 );
 
                 widget.formModel.pull1RM = double.tryParse(pullController.text);
-
-                Navigator.pop(context);
               },
-              child: const Text("Continue"),
+              child: const Text("Create a plan"),
             ),
           ],
         ),

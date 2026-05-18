@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tb_training_logs/enums/exercises.dart';
-import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/models/create_plan_form_model.dart';
-import 'package:tb_training_logs/models/training_plan.dart';
 import 'package:tb_training_logs/screens/proceed_with_plan.dart';
-import 'package:tb_training_logs/utils/generate_training_plan.dart';
 
 class CreatePlanScreen extends StatefulWidget {
   const CreatePlanScreen({super.key});
@@ -181,8 +178,6 @@ class _CreatePlanScreenState extends State<CreatePlanScreen> {
 
             ElevatedButton(
               onPressed: () {
-                final endDate = startDate.add(Duration(days: cycles * 42));
-
                 final formData = CreatePlanFormModel(
                   name: nameController.text,
                   priority: priority,
