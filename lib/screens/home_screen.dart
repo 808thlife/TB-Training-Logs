@@ -12,9 +12,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final activePlan = plans.firstWhereOrNull((p) => p.active);
-    if (activePlan == null) {
-      return const NoPlanView();
-    }
-    return ActivePlanView(plan: activePlan);
+
+    return Scaffold(
+      appBar: AppBar(title: Text("Home Screen")),
+      body: activePlan == null
+          ? NoPlanView()
+          : ActivePlanView(plan: activePlan),
+    );
   }
 }

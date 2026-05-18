@@ -6,6 +6,24 @@ class NoPlanView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Looks like there's no active plan",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          SizedBox(height: 10),
+          TextButton.icon(
+            onPressed: () {},
+            label: Text("Create"),
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).highlightColor,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
