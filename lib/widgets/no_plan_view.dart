@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tb_training_logs/screens/create_plan.dart';
 
 // for cases when there's no active plan. Prompts the user to create one.
 class NoPlanView extends StatelessWidget {
@@ -16,7 +17,12 @@ class NoPlanView extends StatelessWidget {
           ),
           SizedBox(height: 10),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreatePlanScreen()),
+              );
+            },
             label: Text("Create"),
             style: TextButton.styleFrom(
               backgroundColor: Theme.of(context).highlightColor,
