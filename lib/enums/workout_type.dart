@@ -1,1 +1,1 @@
-enum WorkoutType { strength, conditioning, hypertrophy, rest }
+enum WorkoutType { strength, conditioning, rest }
