@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tb_training_logs/enums/exercises.dart';
 import 'package:tb_training_logs/models/create_plan_form_model.dart';
+import 'package:tb_training_logs/screens/home_screen.dart';
 
 import 'package:tb_training_logs/utils/generate_training_plan.dart';
 
+//User is prompted to enter their 1RMs into the app.
 class ProceedWithPlan extends StatefulWidget {
   const ProceedWithPlan({super.key, required this.formModel});
 
@@ -79,14 +81,14 @@ class _ProceedWithPlanState extends State<ProceedWithPlan> {
 
                 widget.formModel.pull1RM = double.tryParse(pullController.text);
 
-                createPlan(formData);
+                final plan = createPlan(formData);
 
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => HomeScreen(plans: [],),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(plans: [plan]),
+                  ),
+                );
               },
               child: const Text("Create a plan"),
             ),

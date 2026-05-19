@@ -1,1 +1,1 @@
-enum WorkoutType { strength, conditioning, rest }
+enum WorkoutType { strength, easy_run, speed_session, long_run, rest }
