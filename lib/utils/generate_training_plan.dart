@@ -66,14 +66,14 @@ List<WorkoutDay> _strengthFirstPlan() {
 List<WorkoutDay> _operatorWeek(DateTime start) {
   return [
     WorkoutDay(date: start, type: WorkoutType.strength),
-    WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easy_run),
+    WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
     WorkoutDay(date: start.add(Duration(days: 2)), type: WorkoutType.strength),
     WorkoutDay(
       date: start.add(Duration(days: 3)),
-      type: WorkoutType.speed_session,
+      type: WorkoutType.speedSession,
     ),
     WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.strength),
-    WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.long_run),
+    WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
   ];
 }
@@ -81,14 +81,14 @@ List<WorkoutDay> _operatorWeek(DateTime start) {
 List<WorkoutDay> _fighterWeek(DateTime start) {
   return [
     WorkoutDay(date: start, type: WorkoutType.strength),
-    WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easy_run),
+    WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
     WorkoutDay(
       date: start.add(Duration(days: 2)),
-      type: WorkoutType.speed_session,
+      type: WorkoutType.speedSession,
     ),
     WorkoutDay(date: start.add(Duration(days: 3)), type: WorkoutType.strength),
-    WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.easy_run),
-    WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.long_run),
+    WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.easyRun),
+    WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
   ];
 }

@@ -83,11 +83,12 @@ class _ProceedWithPlanState extends State<ProceedWithPlan> {
 
                 final plan = createPlan(formData);
 
-                Navigator.push(
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (context) => HomeScreen(plans: [plan]),
                   ),
+                  (route) => false,
                 );
               },
               child: const Text("Create a plan"),
