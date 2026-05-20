@@ -31,40 +31,64 @@ class _ProceedWithPlanState extends State<ProceedWithPlan> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
+            TextFormField(
               controller: pushController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: formData.selectedPush!.label,
               ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return "This field is mandatory";
+                }
+                return null;
+              },
             ),
 
             const SizedBox(height: 12),
 
-            TextField(
+            TextFormField(
               controller: legsController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: formData.selectedLegs!.label,
               ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return "This field is mandatory";
+                }
+                return null;
+              },
             ),
 
             const SizedBox(height: 12),
 
-            TextField(
+            TextFormField(
               controller: deadliftController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: "Deadlift 1RM"),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return "This field is mandatory";
+                }
+                return null;
+              },
             ),
 
             const SizedBox(height: 12),
 
-            TextField(
+            TextFormField(
               controller: pullController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: formData.selectedPull!.label,
               ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return "This field is mandatory";
+                }
+                return null;
+              },
             ),
 
             const Spacer(),
