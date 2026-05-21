@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/providers/plans_provider.dart';
+import 'package:tb_training_logs/screens/create_plan_screen.dart';
 import 'package:tb_training_logs/widgets/plans_list_home_page.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.plans});
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
 
-  final List<TrainingPlan> plans;
   List<TrainingPlan> byStatus(List<TrainingPlan> plans, PlanStatus status) {
     return plans.where((p) => p.status == status).toList();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plans = ref.watch(planProvider);
     final active = byStatus(plans, PlanStatus.active);
 
     final completed = byStatus(plans, PlanStatus.completed);
@@ -28,7 +31,12 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                // Handle add new plan action
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CreatePlanScreen()),
+                  );
+                };
               },
               icon: const Icon(Icons.add),
             ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tb_training_logs/screens/home_screen.dart';
 import 'util.dart';
 import 'theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
 
       title: 'Flutter Demo',
       theme: theme.dark(),
-      home: const HomeScreen(plans: []),
+      home: const HomeScreen(),
     );
   }
 }

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tb_training_logs/enums/exercises.dart';
 import 'package:tb_training_logs/models/create_plan_form_model.dart';
+import 'package:tb_training_logs/providers/plans_provider.dart';
 import 'package:tb_training_logs/screens/home_screen.dart';
 
 import 'package:tb_training_logs/utils/generate_training_plan.dart';
 
 //User is prompted to enter their 1RMs into the app.
-class ProceedWithPlan extends StatefulWidget {
+class ProceedWithPlan extends ConsumerStatefulWidget {
   const ProceedWithPlan({super.key, required this.formModel});
 
   final CreatePlanFormModel formModel;
 
   @override
-  State<ProceedWithPlan> createState() => _ProceedWithPlanState();
+  ConsumerState<ProceedWithPlan> createState() => _ProceedWithPlanState();
 }
 
-class _ProceedWithPlanState extends State<ProceedWithPlan> {
+class _ProceedWithPlanState extends ConsumerState<ProceedWithPlan> {
   final pushController = TextEditingController();
   final legsController = TextEditingController();
   final deadliftController = TextEditingController();
@@ -107,11 +109,11 @@ class _ProceedWithPlanState extends State<ProceedWithPlan> {
 
                 final plan = createPlan(formData);
 
+                ref.read(planProvider.notifier).addPlan(plan);
+
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(plans: [plan]),
-                  ),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                   (route) => false,
                 );
               },
