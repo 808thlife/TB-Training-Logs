@@ -1,35 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tb_training_logs/enums/workout_time_status.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/models/workout_day_model.dart';
 import 'package:tb_training_logs/widgets/workout_day_card.dart';
 
 class ActivePlanView extends StatelessWidget {
   const ActivePlanView({super.key, required this.plan});
 
   final TrainingPlan plan;
+  Widget _buildFiltered(List<WorkoutDay> schedule, WorkoutTimeStatus type) {
+    final filtered = schedule.where((w) {
+      return getWorkoutStatus(w.date) == type;
+    }).toList();
+
+    return ListView.builder(
+      itemCount: filtered.length,
+
+      itemBuilder: (context, index) {
+        return WorkoutDayCard(workoutDay: filtered[index]);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final schedule = plan.schedule;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Active Plan")),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Text(plan.name, style: Theme.of(context).textTheme.headlineLarge),
-              const SizedBox(height: 10),
-              Text(
-                "${DateFormat('MMMM d, y').format(plan.startDate)}"
-                " - "
-                "${DateFormat('MMMM d, y').format(plan.endDate)}",
-                style: Theme.of(context).textTheme.headlineSmall,
+      appBar: AppBar(title: Text(plan.name.toUpperCase())),
+
+      body: DefaultTabController(
+        length: 3,
+
+        child: Column(
+          children: [
+            TabBar(
+              tabs: const [
+                Tab(text: "Today"),
+
+                Tab(text: "Upcoming"),
+
+                Tab(text: "History"),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _buildFiltered(schedule, WorkoutTimeStatus.today),
+
+                  _buildFiltered(schedule, WorkoutTimeStatus.future),
+
+                  _buildFiltered(schedule, WorkoutTimeStatus.past),
+                ],
               ),
-              const SizedBox(height: 10),
-              for (var day in schedule) WorkoutDayCard(workoutDay: day),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

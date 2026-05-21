@@ -27,6 +27,11 @@ class WorkoutDayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final today = DateTime.now();
+    final isToday =
+        workoutDay.date.year == today.year &&
+        workoutDay.date.month == today.month &&
+        workoutDay.date.day == today.day;
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -37,6 +42,9 @@ class WorkoutDayCard extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Card(
+          color: isToday
+              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
+              : null,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
