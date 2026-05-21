@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:tb_training_logs/models/workout_day_model.dart';
 import 'package:tb_training_logs/widgets/workout_details_dialog.dart';
+import 'package:tb_training_logs/widgets/workout_notes_window.dart';
 
 class WorkoutDayCard extends StatelessWidget {
   const WorkoutDayCard({super.key, required this.workoutDay});
@@ -68,6 +69,16 @@ class WorkoutDayCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Spacer(),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) =>
+                          WorkoutNotesDetails(workoutDay: workoutDay),
+                    );
+                  },
+                  icon: Icon(Icons.edit),
+                ),
                 IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
               ],
             ),

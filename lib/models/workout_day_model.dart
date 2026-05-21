@@ -8,7 +8,7 @@ class WorkoutDay {
 
   final List<WorkoutExercise> exercises;
 
-  final String? notes;
+  String? notes;
 
   WorkoutDay({
     required this.date,
