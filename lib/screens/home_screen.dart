@@ -1,9 +1,7 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
-import 'package:tb_training_logs/widgets/active_plan_view.dart';
 import 'package:tb_training_logs/widgets/no_plan_view.dart';
+import 'package:tb_training_logs/widgets/plans_list_home_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.plans});
@@ -12,15 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final activePlan = plans.firstWhereOrNull(
-      (plan) => plan.status == PlanStatus.active,
-    );
+    if (plans.isEmpty) {
+      return const NoPlanView();
+    }
 
-    return Scaffold(
-      appBar: AppBar(title: Text("Home Screen")),
-      body: activePlan == null
-          ? NoPlanView()
-          : ActivePlanView(plan: activePlan),
-    );
+    return PlansListHomePage(plans: plans);
   }
 }

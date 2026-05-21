@@ -7,28 +7,37 @@ class NoPlanView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Looks like there's no active plan",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          SizedBox(height: 10),
-          TextButton.icon(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreatePlanScreen()),
-              );
-            },
-            label: Text("Create"),
-            style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).highlightColor,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Start your first plan!",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Looks like there's no active plan",
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            TextButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreatePlanScreen()),
+                );
+              },
+              label: Text("Create"),
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).highlightColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
