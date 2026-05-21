@@ -9,21 +9,26 @@ class WorkoutDetailsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       // To display the title it is optional
-      title: Text('Info about the workout'),
+      title: Text(
+        'Info about the workout',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
       // Message which will be pop up on the screen
-      content: Text(workoutDay.type.label),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            workoutDay.type.label,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ],
+      ),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('CANCEL'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text('ACCEPT'),
+          child: Text('OK'),
         ),
       ],
     );

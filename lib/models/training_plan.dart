@@ -1,3 +1,4 @@
+import 'package:tb_training_logs/enums/exercises.dart';
 import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:uuid/uuid.dart';
@@ -33,5 +34,27 @@ class WorkoutDay {
 
   final int? intensity;
 
-  WorkoutDay({required this.date, required this.type, this.intensity});
+  final PushExercises? pushExercise;
+
+  final PullExercises? pullExercise;
+
+  final LegsExercises? legsExercise;
+
+  final Deadlift? deadliftExercise;
+
+  WorkoutDay({
+    required this.date,
+
+    required this.type,
+
+    this.intensity,
+
+    this.pushExercise,
+
+    this.pullExercise,
+
+    this.legsExercise,
+
+    this.deadliftExercise,
+  });
 }
