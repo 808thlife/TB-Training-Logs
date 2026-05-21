@@ -26,19 +26,62 @@ class WorkoutDayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Column(
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            // To display the title it is optional
+            title: Text('Info about the workout'),
+            // Message which will be pop up on the screen
+            content: Text(workoutDay.type.label),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('CANCEL'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('ACCEPT'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: SizedBox(
+        height: 100,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
-                Text(DateFormat('M/d/y').format(workoutDay.date)),
-                const SizedBox(height: 5),
-                _workoutIcon(workoutDay.type),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(DateFormat('M/d').format(workoutDay.date)),
+                        const SizedBox(height: 5),
+                        _workoutIcon(workoutDay.type),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  workoutDay.type.label,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Spacer(),
+                IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
