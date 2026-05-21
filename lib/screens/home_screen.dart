@@ -31,12 +31,10 @@ class HomeScreen extends ConsumerWidget {
           actions: [
             IconButton(
               onPressed: () {
-                () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CreatePlanScreen()),
-                  );
-                };
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreatePlanScreen()),
+                );
               },
               icon: const Icon(Icons.add),
             ),
