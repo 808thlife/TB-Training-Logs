@@ -8,19 +8,48 @@ class WorkoutDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      // To display the title it is optional
-      title: Text(
-        'Info about the workout',
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
       // Message which will be pop up on the screen
       content: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            workoutDay.type.label,
-            style: Theme.of(context).textTheme.headlineSmall,
+          Center(
+            child: Text(
+              workoutDay.type.label,
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
           ),
+          const SizedBox(height: 16),
+          ...workoutDay.exercises.map((exercise) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Text(
+                    exercise.exercise.name,
+
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Text(
+                    '${exercise.intensity}% • '
+                    '${exercise.setsAndReps}',
+                  ),
+
+                  Text(
+                    'Target Weight: '
+                    '${exercise.targetWeight.toStringAsFixed(1)} kg',
+                  ),
+                ],
+              ),
+            );
+          }),
         ],
       ),
       actions: [
