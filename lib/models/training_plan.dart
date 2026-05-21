@@ -1,6 +1,6 @@
-import 'package:tb_training_logs/enums/exercises.dart';
 import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
+import 'package:tb_training_logs/models/exercise_model.dart';
 import 'package:uuid/uuid.dart';
 
 class TrainingPlan {
@@ -30,31 +30,16 @@ class TrainingPlan {
 
 class WorkoutDay {
   final DateTime date;
+
   final WorkoutType type;
 
-  final int? intensity;
-
-  final PushExercises? pushExercise;
-
-  final PullExercises? pullExercise;
-
-  final LegsExercises? legsExercise;
-
-  final Deadlift? deadliftExercise;
+  final List<WorkoutExercise> exercises;
 
   WorkoutDay({
     required this.date,
 
     required this.type,
 
-    this.intensity,
-
-    this.pushExercise,
-
-    this.pullExercise,
-
-    this.legsExercise,
-
-    this.deadliftExercise,
+    this.exercises = const [],
   });
 }

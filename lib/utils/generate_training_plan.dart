@@ -1,6 +1,8 @@
+import 'package:tb_training_logs/enums/exercises.dart';
 import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:tb_training_logs/models/create_plan_form_model.dart';
+import 'package:tb_training_logs/models/exercise_model.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
 
 TrainingPlan createPlan(CreatePlanFormModel form) {
@@ -82,27 +84,13 @@ List<WorkoutDay> _operatorWeek(
     WorkoutDay(
       date: start,
       type: WorkoutType.strength,
-      intensity: intensity,
-      pushExercise: form.selectedPush,
-
-      pullExercise: form.selectedPull,
-
-      legsExercise: form.selectedLegs,
-
-      deadliftExercise: form.deadlift,
+      exercises: _buildStrengthExercises(form, intensity),
     ),
     WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
     WorkoutDay(
       date: start.add(Duration(days: 2)),
       type: WorkoutType.strength,
-      intensity: intensity,
-      pushExercise: form.selectedPush,
-
-      pullExercise: form.selectedPull,
-
-      legsExercise: form.selectedLegs,
-
-      deadliftExercise: form.deadlift,
+      exercises: _buildStrengthExercises(form, intensity),
     ),
     WorkoutDay(
       date: start.add(Duration(days: 3)),
@@ -111,14 +99,7 @@ List<WorkoutDay> _operatorWeek(
     WorkoutDay(
       date: start.add(Duration(days: 4)),
       type: WorkoutType.strength,
-      intensity: intensity,
-      pushExercise: form.selectedPush,
-
-      pullExercise: form.selectedPull,
-
-      legsExercise: form.selectedLegs,
-
-      deadliftExercise: form.deadlift,
+      exercises: _buildStrengthExercises(form, intensity),
     ),
     WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
@@ -134,14 +115,7 @@ List<WorkoutDay> _fighterWeek(
     WorkoutDay(
       date: start,
       type: WorkoutType.strength,
-      intensity: intensity,
-      pushExercise: form.selectedPush,
-
-      pullExercise: form.selectedPull,
-
-      legsExercise: form.selectedLegs,
-
-      deadliftExercise: form.deadlift,
+      exercises: _buildStrengthExercises(form, intensity),
     ),
     WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
     WorkoutDay(
@@ -151,17 +125,32 @@ List<WorkoutDay> _fighterWeek(
     WorkoutDay(
       date: start.add(Duration(days: 3)),
       type: WorkoutType.strength,
-      intensity: intensity,
-      pushExercise: form.selectedPush,
-
-      pullExercise: form.selectedPull,
-
-      legsExercise: form.selectedLegs,
-
-      deadliftExercise: form.deadlift,
+      exercises: _buildStrengthExercises(form, intensity),
     ),
     WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.easyRun),
     WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
+  ];
+}
+
+List<WorkoutExercise> _buildStrengthExercises(
+  CreatePlanFormModel form,
+  int intensity,
+) {
+  return [
+    WorkoutExercise(
+      exercise: Exercise(name: form.selectedPush!.label, oneRM: form.push1RM!),
+      intensity: intensity,
+    ),
+
+    WorkoutExercise(
+      exercise: Exercise(name: form.selectedPull!.label, oneRM: form.pull1RM!),
+      intensity: intensity,
+    ),
+
+    WorkoutExercise(
+      exercise: Exercise(name: form.selectedLegs!.label, oneRM: form.legs1RM!),
+      intensity: intensity,
+    ),
   ];
 }
