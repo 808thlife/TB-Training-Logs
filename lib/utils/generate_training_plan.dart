@@ -4,6 +4,7 @@ import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:tb_training_logs/models/create_plan_form_model.dart';
 import 'package:tb_training_logs/models/exercise_model.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/models/workout_day_model.dart';
 
 TrainingPlan createPlan(CreatePlanFormModel form) {
   final int priority = form.priority.toInt();

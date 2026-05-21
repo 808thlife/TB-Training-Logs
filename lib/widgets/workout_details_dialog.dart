@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
-import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/models/workout_day_model.dart';
 
 class WorkoutDetailsDialog extends StatelessWidget {
   const WorkoutDetailsDialog({super.key, required this.workoutDay});
@@ -50,6 +50,13 @@ class WorkoutDetailsDialog extends StatelessWidget {
               ),
             );
           }),
+          const SizedBox(height: 10),
+          Text(
+            workoutDay.type.description,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontStyle: FontStyle.italic),
+          ),
         ],
       ),
       actions: [

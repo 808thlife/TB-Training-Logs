@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
-import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/models/workout_day_model.dart';
 import 'package:tb_training_logs/widgets/workout_details_dialog.dart';
 
 class WorkoutDayCard extends StatelessWidget {

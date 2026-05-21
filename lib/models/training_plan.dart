@@ -1,6 +1,6 @@
 import 'package:tb_training_logs/enums/plan_status.dart';
-import 'package:tb_training_logs/enums/workout_type.dart';
-import 'package:tb_training_logs/models/exercise_model.dart';
+
+import 'package:tb_training_logs/models/workout_day_model.dart';
 import 'package:uuid/uuid.dart';
 
 class TrainingPlan {
@@ -26,20 +26,4 @@ class TrainingPlan {
     required this.status,
     required this.schedule,
   }) : id = id ?? const Uuid().v4();
-}
-
-class WorkoutDay {
-  final DateTime date;
-
-  final WorkoutType type;
-
-  final List<WorkoutExercise> exercises;
-
-  WorkoutDay({
-    required this.date,
-
-    required this.type,
-
-    this.exercises = const [],
-  });
 }
