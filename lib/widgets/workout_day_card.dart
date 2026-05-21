@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tb_training_logs/enums/workout_type.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/widgets/workout_details_dialog.dart';
 
 class WorkoutDayCard extends StatelessWidget {
   const WorkoutDayCard({super.key, required this.workoutDay});
@@ -30,26 +31,7 @@ class WorkoutDayCard extends StatelessWidget {
       onTap: () {
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            // To display the title it is optional
-            title: Text('Info about the workout'),
-            // Message which will be pop up on the screen
-            content: Text(workoutDay.type.label),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('CANCEL'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('ACCEPT'),
-              ),
-            ],
-          ),
+          builder: (context) => WorkoutDetailsDialog(workoutDay: workoutDay),
         );
       },
       child: SizedBox(

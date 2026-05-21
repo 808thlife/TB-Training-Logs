@@ -51,7 +51,11 @@ List<WorkoutDay> _genericPlan(CreatePlanFormModel form) {
     // FIGHTER (weeks 4–6)
     for (int week = 3; week < 6; week++) {
       final weekStart = cycleStart.add(Duration(days: week * 7));
-      final intensity = fighterProgression[week];
+
+      final progressionIndex = week - 3;
+
+      final intensity = fighterProgression[progressionIndex];
+
       schedule.addAll(_fighterWeek(weekStart, intensity));
     }
   }
