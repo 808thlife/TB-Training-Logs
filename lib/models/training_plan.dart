@@ -31,5 +31,7 @@ class WorkoutDay {
   final DateTime date;
   final WorkoutType type;
 
-  WorkoutDay({required this.date, required this.type});
+  final int? intensity;
+
+  WorkoutDay({required this.date, required this.type, this.intensity});
 }

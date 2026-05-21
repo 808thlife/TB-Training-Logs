@@ -29,6 +29,8 @@ TrainingPlan createPlan(CreatePlanFormModel form) {
 //default 6 week cycle (op 3 weeks, 3 weeks fighter)
 List<WorkoutDay> _genericPlan(CreatePlanFormModel form) {
   final schedule = <WorkoutDay>[];
+  const operatorProgression = [70, 80, 90];
+  const fighterProgression = [75, 80, 90];
 
   for (int cycle = 0; cycle < form.cycles; cycle++) {
     final cycleStart = form.startDate.add(Duration(days: cycle * 42));
@@ -40,13 +42,17 @@ List<WorkoutDay> _genericPlan(CreatePlanFormModel form) {
     // OPERATOR (weeks 1–3)
     for (int week = 0; week < 3; week++) {
       final weekStart = cycleStart.add(Duration(days: week * 7));
-      schedule.addAll(_operatorWeek(weekStart));
+
+      final intensity = operatorProgression[week];
+
+      schedule.addAll(_operatorWeek(weekStart, intensity));
     }
 
     // FIGHTER (weeks 4–6)
     for (int week = 3; week < 6; week++) {
       final weekStart = cycleStart.add(Duration(days: week * 7));
-      schedule.addAll(_fighterWeek(weekStart));
+      final intensity = fighterProgression[week];
+      schedule.addAll(_fighterWeek(weekStart, intensity));
     }
   }
 
@@ -63,30 +69,42 @@ List<WorkoutDay> _strengthFirstPlan() {
   return placeholder;
 }
 
-List<WorkoutDay> _operatorWeek(DateTime start) {
+List<WorkoutDay> _operatorWeek(DateTime start, int intensity) {
   return [
-    WorkoutDay(date: start, type: WorkoutType.strength),
+    WorkoutDay(date: start, type: WorkoutType.strength, intensity: intensity),
     WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
-    WorkoutDay(date: start.add(Duration(days: 2)), type: WorkoutType.strength),
+    WorkoutDay(
+      date: start.add(Duration(days: 2)),
+      type: WorkoutType.strength,
+      intensity: intensity,
+    ),
     WorkoutDay(
       date: start.add(Duration(days: 3)),
       type: WorkoutType.speedSession,
     ),
-    WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.strength),
+    WorkoutDay(
+      date: start.add(Duration(days: 4)),
+      type: WorkoutType.strength,
+      intensity: intensity,
+    ),
     WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
   ];
 }
 
-List<WorkoutDay> _fighterWeek(DateTime start) {
+List<WorkoutDay> _fighterWeek(DateTime start, int intensity) {
   return [
-    WorkoutDay(date: start, type: WorkoutType.strength),
+    WorkoutDay(date: start, type: WorkoutType.strength, intensity: intensity),
     WorkoutDay(date: start.add(Duration(days: 1)), type: WorkoutType.easyRun),
     WorkoutDay(
       date: start.add(Duration(days: 2)),
       type: WorkoutType.speedSession,
     ),
-    WorkoutDay(date: start.add(Duration(days: 3)), type: WorkoutType.strength),
+    WorkoutDay(
+      date: start.add(Duration(days: 3)),
+      type: WorkoutType.strength,
+      intensity: intensity,
+    ),
     WorkoutDay(date: start.add(Duration(days: 4)), type: WorkoutType.easyRun),
     WorkoutDay(date: start.add(Duration(days: 5)), type: WorkoutType.longRun),
     WorkoutDay(date: start.add(Duration(days: 6)), type: WorkoutType.rest),
