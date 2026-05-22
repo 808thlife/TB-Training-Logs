@@ -10,7 +10,7 @@ class PlanNotifier extends StateNotifier<List<TrainingPlan>> {
         .where((plan) => plan.status == PlanStatus.active)
         .firstOrNull;
 
-    // Archive already existing plan when a user already has an active one.
+    // Archive an already existing plan when a user already has an active one.
     if (existingActivePlan != null) {
       final updatedPlan = TrainingPlan(
         id: existingActivePlan.id,
