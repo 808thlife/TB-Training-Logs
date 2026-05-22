@@ -53,20 +53,27 @@ class PlansList extends ConsumerWidget {
             );
           },
           child: Card(
-            child: ListTile(
-              title: Text(plan.name),
-              subtitle: Text(
-                "${DateFormat('MMM d').format(plan.startDate)} "
-                "- "
-                "${DateFormat('MMM d').format(plan.endDate)}",
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => ActivePlanView(plan: plan)),
                 );
               },
+              child: ListTile(
+                title: Text(plan.name),
+                subtitle: Text(
+                  "${DateFormat('MMM d').format(plan.startDate)} "
+                  "- "
+                  "${DateFormat('MMM d').format(plan.endDate)}",
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios),
+              ),
             ),
           ),
         );

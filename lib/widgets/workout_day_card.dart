@@ -33,25 +33,26 @@ class WorkoutDayCard extends StatelessWidget {
         workoutDay.date.year == today.year &&
         workoutDay.date.month == today.month &&
         workoutDay.date.day == today.day;
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) => WorkoutDetailsDialog(workoutDay: workoutDay),
-        );
-      },
-      child: SizedBox(
-        height: 100,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10), // Adjust radius as needed
-          ),
-          color: isToday
-              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
-              : null,
-          child: Padding(
-            padding: const EdgeInsets.all(1),
+    return SizedBox(
+      height: 100,
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // Adjust radius as needed
+        ),
+        color: isToday
+            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
+            : null,
+        child: Padding(
+          padding: const EdgeInsets.all(1),
+          child: InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    WorkoutDetailsDialog(workoutDay: workoutDay),
+              );
+            },
             child: Row(
               children: [
                 SizedBox(
