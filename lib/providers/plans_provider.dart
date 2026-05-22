@@ -23,6 +23,7 @@ class PlanNotifier extends StateNotifier<List<TrainingPlan>> {
   void archivePlan(String id) {
     final plan = state.firstWhere((plan) => plan.id == id);
     final updatedPlan = TrainingPlan(
+      id: plan.id,
       name: plan.name,
       startDate: plan.startDate,
       endDate: plan.endDate,
@@ -36,11 +37,26 @@ class PlanNotifier extends StateNotifier<List<TrainingPlan>> {
   void completePlan(String id) {
     final plan = state.firstWhere((plan) => plan.id == id);
     final updatedPlan = TrainingPlan(
+      id: plan.id,
       name: plan.name,
       startDate: plan.startDate,
       endDate: plan.endDate,
       priority: plan.priority,
       status: PlanStatus.completed,
+      schedule: plan.schedule,
+    );
+    updatePlan(updatedPlan);
+  }
+
+  void makeActive(String id) {
+    final plan = state.firstWhere((plan) => plan.id == id);
+    final updatedPlan = TrainingPlan(
+      id: plan.id,
+      name: plan.name,
+      startDate: plan.startDate,
+      endDate: plan.endDate,
+      priority: plan.priority,
+      status: PlanStatus.active,
       schedule: plan.schedule,
     );
     updatePlan(updatedPlan);
