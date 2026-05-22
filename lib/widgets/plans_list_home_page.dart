@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/enums/plan_status.dart';
+import 'package:tb_training_logs/providers/plans_provider.dart';
 import 'package:tb_training_logs/screens/active_plan_view_screen.dart';
 
-class PlansList extends StatelessWidget {
-  const PlansList({super.key, required this.plans});
+class PlansList extends ConsumerWidget {
+  const PlansList({super.key, required this.status});
 
-  final List<TrainingPlan> plans;
+  final PlanStatus status;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plans = ref
+        .watch(planProvider)
+        .where((plan) => plan.status == status)
+        .toList();
     return ListView.builder(
       padding: const EdgeInsets.all(12),
       itemCount: plans.length,

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
+import 'package:tb_training_logs/providers/plans_provider.dart';
 
-class ChangePlanStatusDialog extends StatelessWidget {
+class ChangePlanStatusDialog extends ConsumerWidget {
   const ChangePlanStatusDialog({super.key, required this.plan});
 
   final TrainingPlan plan;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       title: const Text('Change Plan Status'),
       content: const Text(
@@ -19,15 +21,24 @@ class ChangePlanStatusDialog extends StatelessWidget {
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            ref.read(planProvider.notifier).completePlan(plan.id);
+            Navigator.pop(context);
+          },
           child: const Text('Mark as completed'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            ref.read(planProvider.notifier).archivePlan(plan.id);
+            Navigator.pop(context);
+          },
           child: const Text('Archive'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            ref.read(planProvider.notifier).deletePlan(plan.id);
+            Navigator.pop(context);
+          },
           child: const Text('Delete'),
         ),
       ],

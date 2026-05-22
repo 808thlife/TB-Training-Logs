@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tb_training_logs/enums/plan_status.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
-import 'package:tb_training_logs/providers/plans_provider.dart';
 import 'package:tb_training_logs/screens/create_plan_screen.dart';
 import 'package:tb_training_logs/widgets/plans_list_home_page.dart';
 
@@ -15,13 +14,6 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final plans = ref.watch(planProvider);
-    final active = byStatus(plans, PlanStatus.active);
-
-    final completed = byStatus(plans, PlanStatus.completed);
-
-    final archived = byStatus(plans, PlanStatus.archived);
-
     return DefaultTabController(
       length: 3,
 
@@ -52,11 +44,9 @@ class HomeScreen extends ConsumerWidget {
 
         body: TabBarView(
           children: [
-            PlansList(plans: active),
-
-            PlansList(plans: completed),
-
-            PlansList(plans: archived),
+            PlansList(status: PlanStatus.active),
+            PlansList(status: PlanStatus.completed),
+            PlansList(status: PlanStatus.archived),
           ],
         ),
       ),
