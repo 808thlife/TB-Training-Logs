@@ -93,31 +93,42 @@ class _ProceedWithPlanState extends ConsumerState<ProceedWithPlan> {
               },
             ),
 
-            const Spacer(),
+            const SizedBox(height: 10),
 
-            ElevatedButton(
-              onPressed: () {
-                widget.formModel.push1RM = double.tryParse(pushController.text);
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    widget.formModel.push1RM = double.tryParse(
+                      pushController.text,
+                    );
 
-                widget.formModel.legs1RM = double.tryParse(legsController.text);
+                    widget.formModel.legs1RM = double.tryParse(
+                      legsController.text,
+                    );
 
-                widget.formModel.deadlift1RM = double.tryParse(
-                  deadliftController.text,
-                );
+                    widget.formModel.deadlift1RM = double.tryParse(
+                      deadliftController.text,
+                    );
 
-                widget.formModel.pull1RM = double.tryParse(pullController.text);
+                    widget.formModel.pull1RM = double.tryParse(
+                      pullController.text,
+                    );
 
-                final plan = createPlan(formData);
+                    final plan = createPlan(formData);
 
-                ref.read(planProvider.notifier).addPlan(plan);
+                    ref.read(planProvider.notifier).addPlan(plan);
 
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                  (route) => false,
-                );
-              },
-              child: const Text("Create a plan"),
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      (route) => false,
+                    );
+                  },
+                  child: const Text("Create a plan"),
+                ),
+              ],
             ),
           ],
         ),
