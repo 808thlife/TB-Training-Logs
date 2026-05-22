@@ -38,7 +38,8 @@ class PlansList extends ConsumerWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Handle delete action
+                      ref.read(planProvider.notifier).deletePlan(plan.id);
+                      Navigator.pop(context);
                     },
                     child: Text(
                       "Delete",
