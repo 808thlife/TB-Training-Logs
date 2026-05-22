@@ -12,7 +12,10 @@ class ChangePlanStatusDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
-      title: const Text('Change Plan Status'),
+      title: Text(
+        'Change Plan Status (Current Status: ${plan.status.label})',
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
       content: const Text(
         'Are you sure you want to change the status of this plan?',
       ),
@@ -21,12 +24,11 @@ class ChangePlanStatusDialog extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
           child: const Text('Cancel'),
         ),
-        if (plan.status != PlanStatus.archived &&
-            plan.status != PlanStatus.completed)
+        if (plan.status == PlanStatus.active)
           TextButton(
             onPressed: () {
               ref.read(planProvider.notifier).completePlan(plan.id);
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Text('Mark as completed'),
           ),
@@ -34,11 +36,11 @@ class ChangePlanStatusDialog extends ConsumerWidget {
           TextButton(
             onPressed: () {
               ref.read(planProvider.notifier).archivePlan(plan.id);
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: const Text('Archive'),
           ),
-        if (plan.status == PlanStatus.archived)
+        if (plan.status != PlanStatus.active)
           TextButton(
             onPressed: () {
               ref.read(planProvider.notifier).makeActive(plan.id);
