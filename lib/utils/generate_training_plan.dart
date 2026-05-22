@@ -12,7 +12,7 @@ TrainingPlan createPlan(CreatePlanFormModel form) {
   List<WorkoutDay> schedule;
 
   if (priority >= 7) {
-    schedule = _strengthFirstPlan();
+    schedule = _strengthFirstPlan(form);
   } else if (priority >= 4) {
     schedule = _genericPlan(form);
   } else {
@@ -91,9 +91,24 @@ List<WorkoutDay> _conditioningHeavyPlan(CreatePlanFormModel form) {
   return schedule;
 }
 
-List<WorkoutDay> _strengthFirstPlan() {
-  final List<WorkoutDay> placeholder = [];
-  return placeholder;
+List<WorkoutDay> _strengthFirstPlan(CreatePlanFormModel form) {
+  final schedule = <WorkoutDay>[];
+  const fighterProgression = [70, 80, 90, 75, 85, 95];
+
+  for (int cycle = 0; cycle < form.cycles; cycle++) {
+    final cycleStart = form.startDate.add(Duration(days: cycle * 42));
+    for (int week = 0; week < 6; week++) {
+      final weekStart = cycleStart.add(Duration(days: week * 7));
+
+      final progressionIndex = week;
+
+      final intensity = fighterProgression[progressionIndex];
+
+      schedule.addAll(_operatorWeek(weekStart, intensity, form));
+    }
+  }
+
+  return schedule;
 }
 
 List<WorkoutDay> _operatorWeek(
