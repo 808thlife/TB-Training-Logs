@@ -6,22 +6,24 @@ class PlanNotifier extends StateNotifier<List<TrainingPlan>> {
   PlanNotifier() : super([]);
 
   void addPlan(TrainingPlan plan) {
-    final existingActivePlan = state
+    final TrainingPlan? existingActivePlan = state
         .where((plan) => plan.status == PlanStatus.active)
-        .first;
+        .firstOrNull;
 
     // Archive already existing plan when a user already has an active one.
-    final updatedPlan = TrainingPlan(
-      id: existingActivePlan.id,
-      name: existingActivePlan.name,
-      startDate: existingActivePlan.startDate,
-      endDate: existingActivePlan.endDate,
-      priority: existingActivePlan.priority,
-      status: PlanStatus.archived,
-      schedule: existingActivePlan.schedule,
-    );
+    if (existingActivePlan != null) {
+      final updatedPlan = TrainingPlan(
+        id: existingActivePlan.id,
+        name: existingActivePlan.name,
+        startDate: existingActivePlan.startDate,
+        endDate: existingActivePlan.endDate,
+        priority: existingActivePlan.priority,
+        status: PlanStatus.archived,
+        schedule: existingActivePlan.schedule,
+      );
+      updatePlan(updatedPlan);
+    }
 
-    updatePlan(updatedPlan);
     state = [...state, plan];
   }
 
