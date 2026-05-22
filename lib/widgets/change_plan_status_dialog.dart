@@ -32,7 +32,8 @@ class ChangePlanStatusDialog extends ConsumerWidget {
             },
             child: const Text('Mark as completed'),
           ),
-        if (plan.status != PlanStatus.archived)
+        if (plan.status != PlanStatus.archived &&
+            plan.status != PlanStatus.completed)
           TextButton(
             onPressed: () {
               ref.read(planProvider.notifier).archivePlan(plan.id);
