@@ -19,9 +19,6 @@ class WorkoutExercise {
     switch (intensity) {
       case 70:
       case 75:
-      case 80:
-        return '3-5 x 5';
-
       case 85:
         return '3-4 x 3-4';
 
@@ -32,7 +29,7 @@ class WorkoutExercise {
         return '3-4 x 1-2';
 
       default:
-        return '3 x 5';
+        return '3-5 x 5';
     }
   }
 }
