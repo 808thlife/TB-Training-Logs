@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tb_training_logs/enums/workout_time_status.dart';
 import 'package:tb_training_logs/models/training_plan.dart';
 import 'package:tb_training_logs/models/workout_day_model.dart';
+import 'package:tb_training_logs/widgets/change_cluster.dart';
 import 'package:tb_training_logs/widgets/change_plan_status_dialog.dart';
 import 'package:tb_training_logs/widgets/workout_day_card.dart';
 
@@ -31,6 +32,15 @@ class ActivePlanView extends StatelessWidget {
       appBar: AppBar(
         title: Text(plan.name.toUpperCase()),
         actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => ChangeClusterDialog(),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {

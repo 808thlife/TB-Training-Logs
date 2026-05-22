@@ -77,8 +77,9 @@ class WorkoutDayCard extends StatelessWidget {
                           WorkoutNotesDetails(workoutDay: workoutDay),
                     );
                   },
-                  icon: Icon(Icons.edit),
+                  icon: Icon(Icons.edit_note),
                 ),
+                // Adding 2 calendar. Will implement later
                 IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
               ],
             ),
