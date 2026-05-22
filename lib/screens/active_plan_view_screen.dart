@@ -4,6 +4,7 @@ import 'package:tb_training_logs/models/training_plan.dart';
 import 'package:tb_training_logs/models/workout_day_model.dart';
 
 import 'package:tb_training_logs/widgets/change_plan_status_dialog.dart';
+import 'package:tb_training_logs/widgets/one_rm_dialog.dart';
 import 'package:tb_training_logs/widgets/workout_day_card.dart';
 
 class ActivePlanView extends StatelessWidget {
@@ -32,6 +33,15 @@ class ActivePlanView extends StatelessWidget {
       appBar: AppBar(
         title: Text(plan.name.toUpperCase()),
         actions: [
+          IconButton(
+            icon: Icon(Icons.query_stats),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => OneRmDialog(plan: plan),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {
