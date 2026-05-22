@@ -43,11 +43,15 @@ class WorkoutDayCard extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), // Adjust radius as needed
+          ),
           color: isToday
               ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
               : null,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(1),
             child: Row(
               children: [
                 SizedBox(
