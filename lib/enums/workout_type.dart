@@ -1,4 +1,20 @@
-enum WorkoutType { strength, easyRun, speedSession, longRun, rest }
+import 'package:hive_ce/hive.dart';
+
+part 'workout_type.g.dart';
+
+@HiveType(typeId: 11)
+enum WorkoutType {
+  @HiveField(0)
+  strength,
+  @HiveField(1)
+  easyRun,
+  @HiveField(2)
+  speedSession,
+  @HiveField(3)
+  longRun,
+  @HiveField(4)
+  rest,
+}
 
 extension WorkoutTypeLabel on WorkoutType {
   String get label {

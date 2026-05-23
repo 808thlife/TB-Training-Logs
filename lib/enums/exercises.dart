@@ -1,10 +1,48 @@
-enum PushExercises { bp, ohp, dips }
+import 'package:hive_ce/hive.dart';
 
-enum PullExercises { pu, br, lp }
+part 'exercises.g.dart';
 
-enum LegsExercises { bsq, frsq, beltsq }
+@HiveType(typeId: 20)
+enum PushExercises {
+  @HiveField(0)
+  bp,
 
-enum Deadlift { df }
+  @HiveField(1)
+  ohp,
+
+  @HiveField(2)
+  dips,
+}
+
+@HiveType(typeId: 21)
+enum PullExercises {
+  @HiveField(0)
+  pu,
+
+  @HiveField(1)
+  br,
+
+  @HiveField(2)
+  lp,
+}
+
+@HiveType(typeId: 22)
+enum LegsExercises {
+  @HiveField(0)
+  bsq,
+
+  @HiveField(1)
+  frsq,
+
+  @HiveField(2)
+  beltsq,
+}
+
+@HiveType(typeId: 23)
+enum Deadlift {
+  @HiveField(0)
+  df,
+}
 
 extension DeadliftLabel on Deadlift {
   String get label {

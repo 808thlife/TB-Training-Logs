@@ -1,4 +1,16 @@
-enum WorkoutTimeStatus { past, today, future }
+import 'package:hive_ce/hive.dart';
+
+part 'workout_time_status.g.dart';
+
+@HiveType(typeId: 12)
+enum WorkoutTimeStatus {
+  @HiveField(0)
+  past,
+  @HiveField(1)
+  today,
+  @HiveField(2)
+  future,
+}
 
 WorkoutTimeStatus getWorkoutStatus(DateTime date) {
   final now = DateTime.now();

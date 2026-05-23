@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:tb_training_logs/hive_registrar.g.dart';
+import 'package:tb_training_logs/models/training_plan.dart';
 import 'package:tb_training_logs/screens/home_screen.dart';
 import 'util.dart';
 import 'theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapters();
+
+  await Hive.openBox<TrainingPlan>('training_plans');
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
