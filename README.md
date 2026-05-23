@@ -1,6 +1,6 @@
 # TB Training Logs
 
-A Flutter application for generating and tracking structured hybrid training plans based on the **Tactical Barbell Green Protocol** (Operator / Fighter continuation model).
+A Flutter application for generating and tracking structured hybrid training plans based on the **Tactical Barbell Green Protocol** (Hybrid/Op continuation model).
 
 The app focuses on combining strength training progression with conditioning work, while allowing users to track workouts, intensity, and progression over time.
 
